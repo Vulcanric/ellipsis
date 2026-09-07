@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ellipsis | Agent runs</title>
+  <link rel="stylesheet" href="/web/styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/"><span class="mark"><i></i><i></i><i></i></span><span>ellipsis<span class="dot">.</span></span></a>
+    <p class="eyebrow">Workspace</p>
+    <nav><button class="nav-link active" data-view="runs"><span>◈</span>Runs</button><button class="nav-link" data-view="new"><span>＋</span>New task</button><button class="nav-link" data-view="approvals"><span>◷</span>Approvals</button></nav>
+    <div class="sidebar-bottom"><span class="system-dot"></span>Control plane online</div>
+  </aside>
+  <main>
+    <header class="topbar"><span class="crumb">Workspace / <strong>Runs</strong></span><button id="themeButton" class="theme" aria-label="Toggle dark mode">☾</button></header>
+    <section class="content">
+      <div class="heading"><div><p class="eyebrow">Autonomous operations</p><h1>Give ellipsis<br><em>something to do.</em></h1></div><span class="api-status" id="apiStatus">Connecting...</span></div>
+      <section class="new-task panel" id="newTaskPanel"><div><p class="eyebrow">New task</p><h2>What should ellipsis handle?</h2><p class="muted">Describe the outcome. The agent will pause before irreversible actions.</p></div><form id="taskForm"><textarea id="instruction" required maxlength="10000" placeholder="Research the best standing desk under $300 and recommend the top three..."></textarea><div class="form-footer"><label><input type="checkbox" id="approvalPolicy" checked> Require approval for irreversible actions</label><button type="submit" class="primary" id="submitTask">Start task <span>↗</span></button></div></form></section>
+      <section class="runs-section"><div class="section-heading"><div><p class="eyebrow">Recent runs</p><h2>Your agent activity</h2></div><button class="refresh" id="refreshButton">Refresh ↻</button></div><div class="run-list" id="runList"><div class="empty">Loading runs...</div></div></section>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="/web/app.js"></script>
+</body>
+</html>
