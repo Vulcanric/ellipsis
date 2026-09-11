@@ -54,7 +54,6 @@ services:
     environment:
       DATABASE_URL: postgresql+asyncpg://ellipsis:ellipsis@postgres:5432/ellipsis
       REDIS_URL: redis://redis:6379/0
-    ports: ["8000:8000"]
     depends_on:
       migrations:
         condition: service_completed_successfully
