@@ -15,7 +15,15 @@ export type Run = {
   updated_at: string;
 };
 
+export type Approval = {
+  id: string;
+  run_id: string;
+  action: string;
+  status: string;
+};
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+
 
 export async function api<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`${API_URL}${path}`, { ...init, headers: { "content-type": "application/json", ...init?.headers } });

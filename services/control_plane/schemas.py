@@ -36,3 +36,12 @@ class ApprovalCreate(BaseModel):
 
 class ApprovalDecision(BaseModel):
     status: str = Field(pattern="^(approved|rejected)$")
+
+
+class ApprovalResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    id: UUID
+    run_id: UUID
+    action: str
+    status: str
+

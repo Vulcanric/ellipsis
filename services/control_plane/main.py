@@ -13,9 +13,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from .db import get_session
 from .events import EventBus
 from .models import Approval, Run, Task
-from .schemas import ApprovalCreate, ApprovalDecision, RunResponse, TaskCreate, TaskResponse
+from .schemas import ApprovalCreate, ApprovalDecision, ApprovalResponse, RunResponse, TaskCreate, TaskResponse
 
 app = FastAPI(title="ellipsis control plane", version="0.2.0")
+
 redis_dsn = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 
 
@@ -39,7 +40,14 @@ async def list_tasks(session: AsyncSession = Depends(get_session)) -> list[Task]
     return list(result.scalars())
 
 
+@app.get("/v1/approvals", response_model=list[ApprovalResponse])
+async def list_approvals(session: AsyncSession = Depends(get_session)) -> list[Approval]:
+    result = await session.execute(select(Approval).where(Approval.status == "pending"))
+    return list(result.scalars())
+
+
 @app.get("/v1/tasks/{task_id}", response_model=TaskResponse)
+
 async def get_task(task_id: UUID, session: AsyncSession = Depends(get_session)) -> Task:
     task = await session.get(Task, task_id)
     if task is None:
